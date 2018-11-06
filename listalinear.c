@@ -5,7 +5,7 @@
 	Criação dos nodes     |
 ------------------------*/
 struct reg{
-	int num;
+	int num, peso, visitado;
 	struct reg *next;
 };
 typedef struct reg *node;
@@ -20,19 +20,23 @@ void createHead(node *head){
 }
 
 // insere um elemento na primeira posição da lista
-void insertFirst(node *head, int num){
+void insertFirst(node *head, int num, int peso){
 	node p;
 	p = (node) malloc(sizeof(node));
 	p->num = num;
+	p->peso = peso;
+	p->visitado = 0;
 	p->next = *head;
 	*head = p;
 }
 
 // insere um elemento levando em conta a ordem da lista
-int insertOrdered(node *head, int num){
+int insertOrdered(node *head, int num, int peso){
 	node p;
 	p = (node) malloc(sizeof(node));
 	p->num = num;
+	p->peso = peso;
+	p->visitado = 0;
 	if(!*head){
 		*head = p;
 		p->next = NULL;
@@ -55,9 +59,11 @@ int insertOrdered(node *head, int num){
 }
 
 // insere um elemento no final da lista
-void insertLast(node *head, int num){
+void insertLast(node *head, int num, int peso){
 	node p = (node) malloc(sizeof(node));
 	p->num = num;
+	p->peso = peso;
+	p->visitado = 0;
 	p->next = NULL;
 	if(*head == NULL){
 		*head = p;
@@ -68,6 +74,19 @@ void insertLast(node *head, int num){
 		}
 		q->next = p;
 	}
+}
+
+// visita o elemento escolhido
+int visitElement(node *head, int num){
+	node p = *head;
+	while(p){
+		if(p->num == num){
+			p->visitado = 1;
+			return 1;
+		}
+		p = p->next;
+	}
+	return 0;
 }
 
 // remove o primeiro elemento da lista
@@ -210,8 +229,20 @@ int countElements(node head){
 void showList(node head){
 	node p = head;
 	while(p){
-		printf("%d ", *&p->num);
+		printf("%d (peso: %d)(visitado: %d)\n", *&p->num, *&p->peso, *&p->visitado);
 		p = p->next;
 	}
+}
+
+// verifica se o elemento foi visitado
+int checkVisited(node head, int num){
+	node p = head;
+	while(p){
+		if(p->num == num && p->visitado == 1){
+			return 1;
+		}
+		p = p->next;
+	}
+	return 0;
 }
 
