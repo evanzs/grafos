@@ -66,27 +66,55 @@ int interface ()
 /*-------------------------------------
 			CRIANDO GRAFO        	   |
 -------------------------------------*/
-CreadeG(node *head)// Possivelmente esse nome precise ser editado 
+CreadeG(node head[])// Possivelmente esse nome precise ser editado 
 {
-   int tamanho, i = 0; 
+   int cont            = 0; 
+   int tamanho 		   = 0; 
+   int tamanho_adja    = 0;
+   node p;
+   
+   
+   //|vertices| Vertices adja|......| ..... |Tamanho__adja|
+   //..
+   //.
+   //.
+   //.
+   //.
+   //.
+   //|tamanho|....... | ........| tamanho_adja|
    
    
    
    
    
    
-    int i, id;
+   
+   printf  (Qual o numero de Verticies: ");
+   scanf  ("%d",tamanho);
+   
+   
+   
+   //iniciando o head
+   for (cont = 0; cont < tamanho; cont++)
+        head[i] = NULL;
 
-    for (i = 0; i < tamanho; i++) {
-        listaAdj[i] = (def_listaAdj) malloc (sizeof(struct listaAdj));
-        listaAdj[i]->dest = i+1;
-        listaAdj[i]->prox = NULL;
-        listaAdj[i]->marcado = 0;
+    for (cont = 0; cont < tamanho; cont++)
+	 {
+        head[i] = (node) malloc (sizeof(struct head));
+        head[i]->num = i++;
+        head[i]->next = NULL;
+        head[i]->visitado= 0;
     }
    
+	printf ("Qual numero de adjacentes: ");
+	//incluir errors
+	scanf  ("%d",&tamanho_adja);	
+	insertNode(&head,tamanho_adja,tamanho){
 	
 	
 	
+	
+
 	
 	
 }
